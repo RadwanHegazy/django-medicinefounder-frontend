@@ -1,0 +1,51 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الرئيسية</title>
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+</head>
+<body>
+    
+    <img src="{% static 'images/bg.png' %}" alt="" class="bg">
+
+
+    <div class="container">
+        
+        <div class="up">
+            <div class="left">
+                {% if c_user %}
+                    <a href="{% url 'upload' %}">رفع الدواء</a>
+                    <a href="{% url 'logout' %}">تسجيل الخروج</a>
+                {% else %}
+                    <a href="{% url 'register' %}">انشاء حساب</a>
+                    <a href="{% url 'login' %}">تسجيل الدخول</a>
+                {% endif %}
+            </div>
+
+            <form class="right" method="GET">
+                <input type="text" placeholder="ابحث هنا عن الدواء" name="search">
+                <button type="submit">بحث</button>
+            </dformv>
+
+        </div>
+
+        <div class="down">
+
+            {% for obj in object_list %}
+                <div class="box">
+                    <p>{{obj.name}}</p>
+                    <img src="{{main_url}}{{obj.img}}" width="100px" height="100px"  alt="">
+                    <p>{{obj.user.pharmcy_name}}</p>
+                    <a href="https://wa.me/{{obj.user.whatsapp}}" target="_blank">تواصل عبر واتس اب</a>
+                </div>
+            {% endfor %}
+
+        </div>
+
+
+    </div>
+</body>
+</html>

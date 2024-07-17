@@ -1,0 +1,51 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>انشاء حساب</title>
+    <link rel="stylesheet" href="{% static 'css/form.css' %}">
+</head>
+<body>
+
+    {% for msg in messages %}
+        <script>alert("{{msg}}")</script>
+    {% endfor %}
+
+    <img src="{% static 'images/bg.png' %}" alt="" class="bg">
+    
+    <form class="container" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="img-cont">
+            <p>اضغط هنا لرفع الدواء</p>
+            <input type="file" hidden id="imgFile" name="img">
+            <img src="" alt="">
+        </div>
+        
+        <input type="text" placeholder="اسم الدواء" name="name">
+    
+        <div class="btns">
+            <button class="submit" type="submit">رفع الدواء</button>
+        </div>
+    
+    </form>
+
+    <script>
+
+        var viewImgBtn = document.querySelector('.img-cont');
+        var imgFile = document.getElementById('imgFile');
+        var img = viewImgBtn.querySelector('img');
+
+        viewImgBtn.addEventListener('click',()=>{
+            imgFile.click()
+        })
+
+        imgFile.addEventListener('change',(e)=>{
+            img.src = URL.createObjectURL(e.target.files[0]);
+            img.classList.add('view');
+        })
+
+    </script>
+</body>
+</html>

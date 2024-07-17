@@ -1,0 +1,34 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تسجيل الدخول</title>
+    <link rel="stylesheet" href="{% static 'css/form.css' %}">
+</head>
+<body>
+
+    {% for msg in messages %}
+        <script>alert("{{msg}}")</script>
+    {% endfor %}
+
+    <img src="{% static 'images/bg.png' %}" alt="" class="bg">
+    
+    <form class="container" method="POST">
+        
+        {% csrf_token %}
+
+        <input type="text" placeholder="البريد الالكتروني" name="email">
+        <input type="text" placeholder="كلمة المرور" name="password">
+    
+        <div class="btns">
+            <a href="{% url 'register' %}">انشاء حساب</a>
+            <button type="submit">تسجيل الدخول</button>
+        </div>
+    
+
+    </form>
+
+</body>
+</html>
